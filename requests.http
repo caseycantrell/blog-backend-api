@@ -1,3 +1,5 @@
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2MzM1NDU4MjJ9.qr2_vQ4loVM_RyPi-vyJUmAH8lR6kVzwhzdcV3-O4j8
+
 ### Users create (signup)
 POST http://localhost:3000/users
 Content-Type: application/json
@@ -17,3 +19,32 @@ Content-Type: application/json
   "email": "test@test.com",
   "password": "password"
 }
+
+### Posts index
+GET http://localhost:3000/posts
+
+### Posts create
+POST http://localhost:3000/posts
+Authorization: Bearer {{jwt}}
+Content-Type: application/json
+
+{
+  "title": "Test title",
+  "body": "Test body"
+}
+
+### Posts show
+GET http://localhost:3000/posts/1.json
+
+### Posts update
+PATCH http://localhost:3000/posts/10
+Authorization: Bearer {{jwt}}
+Content-Type: application/json
+
+{
+  "image": "test"
+}
+
+### Posts destroy
+DELETE http://localhost:3000/posts/10
+Authorization: Bearer {{jwt}}

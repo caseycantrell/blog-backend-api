@@ -1,5 +1,5 @@
-User.create(name: "Peter", email: "peter@email.com", password: "password")
-User.create(name: "Test", email: "test@email.com", password: "password")
+User.create(name: "Peter", email: "peter@test.com", password: "password")
+User.create(name: "Test", email: "test@test.com", password: "password")
 
 Post.create(user_id: 1, title: Faker::Company.catch_phrase, body: Faker::Hipster.paragraph(sentence_count: 6), image: "https://i.picsum.photos/id/302/200/300.jpg?hmac=b5e6gUSooYpWB3rLAPrDpnm8PsPb84p_NXRwD-DK-1I")
 Post.create(user_id: 1, title: Faker::Company.catch_phrase, body: Faker::Hipster.paragraph(sentence_count: 6), image: "https://i.picsum.photos/id/131/200/300.jpg?hmac=9q7mRSOguNBFGg_gPPRKlfjNINGjXWeDBTYPP1_gEas")
