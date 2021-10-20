@@ -38,4 +38,31 @@ RSpec.describe "Posts", type: :request do
 
     end
   end
+
+  describe "POST /posts" do
+
+    it "should create a new post when all submitted data is valid" do
+    user = User.create({name: "Test", email: "test@test.com", password: "password"})
+    jwt = JWT.encode({user_id: user.id}, Rails.application.credentials.fetch(:secret_key_base), "HS256")
+
+    post "/posts", params: {title: "new post", body: "body of new post"}, headers: {"Authorization" => "Bearer #{jwt}"}
+    post = JSON.parse(response.body)
+    expect(response).to have_http_status(200)
+    expect(post["title"]).to eq("new post")
+  end
+
+  it "should return a 401 status if user is not logged in" do
+    post "/posts", params: {}
+    expect(response).to have_http_status(:unauthorized)
+  end
+
+  it "should return an error code with authorization but invalid data" do
+    user = User.create({name: "Test", email: "test@test.com", password: "password"})
+    jwt = JWT.encode({user_id: user.id}, Rails.application.credentials.fetch(:secret_key_base), "HS256")
+
+    post "/posts", params: {}, headers: {"Authorization" => "Bearer #{jwt}"}
+    expect(response).to have_http_status(:bad_request)
+    end
+  end
 end
+
